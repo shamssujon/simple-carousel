@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/src/img/logo.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Simple Carousel</title>
+	</head>
+	<body>
+		<div id="app" class="container">
+			<div class="simple-carousel py-20">
+				<div class="simple-carousel-wrapper relative overflow-hidden h-96">
+					<div class="item absolute w-full h-full">
+						<img src="/src/img/1.jpg" alt="" class="w-full h-full object-cover" />
+					</div>
+					<div class="item absolute w-full h-full">
+						<img src="/src/img/2.jpg" alt="" class="w-full h-full object-cover" />
+					</div>
+					<div class="item absolute w-full h-full">
+						<img src="/src/img/3.jpg" alt="" class="w-full h-full object-cover" />
+					</div>
+				</div>
+				<div class="nav flex items-center justify-between">
+					<button class="sc-prev w-12 h-12">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+							<path
+								fill-rule="evenodd"
+								d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+						</svg>
+					</button>
+					<button class="sc-next w-12 h-12">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+							<path
+								fill-rule="evenodd"
+								d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<script type="module" src="/src/js/main.js"></script>
+	</body>
+</html>
