@@ -10,33 +10,35 @@
 	<body>
 		<div id="app" class="container py-20">
 			<div class="simple-carousel">
-				<div class="simple-carousel--wrapper">
-					<div class="simple-carousel--slide">
-						<img src="/src/img/1.jpg" alt="" />
+				<div class="simple-carousel--wrapper relative overflow-hidden">
+					<div class="simple-carousel--slides">
+						<div class="simple-carousel--slide">
+							<img src="/src/img/1.jpg" alt="" />
+						</div>
+						<div class="simple-carousel--slide">
+							<img src="/src/img/2.jpg" alt="" />
+						</div>
+						<div class="simple-carousel--slide">
+							<img src="/src/img/3.jpg" alt="" />
+						</div>
 					</div>
-					<div class="simple-carousel--slide">
-						<img src="/src/img/2.jpg" alt="" />
-					</div>
-					<div class="simple-carousel--slide">
-						<img src="/src/img/3.jpg" alt="" />
-					</div>
-				</div>
 
-				<!-- Nagivation -->
-				<button class="simple-carousel--nav button-prev">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-						<path
-							fill-rule="evenodd"
-							d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-					</svg>
-				</button>
-				<button class="simple-carousel--nav button-next">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-						<path
-							fill-rule="evenodd"
-							d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-					</svg>
-				</button>
+					<!-- Nagivation -->
+					<button class="simple-carousel--nav button-prev">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+							<path
+								fill-rule="evenodd"
+								d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+						</svg>
+					</button>
+					<button class="simple-carousel--nav button-next">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+							<path
+								fill-rule="evenodd"
+								d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+						</svg>
+					</button>
+				</div>
 
 				<!-- Pagination -->
 				<div class="simple-carousel--dots"></div>

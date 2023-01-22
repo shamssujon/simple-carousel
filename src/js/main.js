@@ -1,6 +1,6 @@
 const carouselContainer = document.querySelector(".simple-carousel");
-const carouselWrapper = carouselContainer.querySelector(".simple-carousel--wrapper");
-const slides = Array.from(carouselWrapper.children);
+const carouselSlidesContainer = carouselContainer.querySelector(".simple-carousel--slides");
+const slides = Array.from(carouselSlidesContainer.children);
 
 // Nagivations
 const prevSlideBtn = carouselContainer.querySelector(".simple-carousel--nav.button-prev");
@@ -32,19 +32,59 @@ const updateActiveDot = (currentDot, targetDot) => {
 	targetDot.classList.add("active");
 };
 
+// Checking if carouselDotsContainer exists in the DOM
+if (carouselDotsContainer) {
+	// for every slides, create a dot button
+	slides.forEach(() => {
+		const dotBtn = document.createElement("button");
+		dotBtn.classList.add("simple-carousel--dot");
+		carouselDotsContainer.appendChild(dotBtn);
+	});
+}
+
+const carouselDotIndicators = Array.from(carouselDotsContainer.children);
+
+// Setting active class to the first dot
+carouselDotIndicators[0].classList.add("active");
+
+// Clicking pagination dots will move to the target slide
+carouselDotIndicators.forEach((dot, index) => {
+	dot.addEventListener("click", (event) => {
+		const targetDot = event.target;
+		const currentDot = carouselDotsContainer.querySelector(".active");
+		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
+		const targetSlide = slides[index];
+
+		moveToTargetSlide(carouselSlidesContainer, currentSlide, targetSlide);
+		updateActiveDot(currentDot, targetDot);
+	});
+});
+
 // Checking if prevSlideBtn exists in the DOM
 if (prevSlideBtn) {
 	// Clicking prev button will move to prev slide
 	prevSlideBtn.addEventListener("click", () => {
 		// Changing slide
-		const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-		const prevSlide = currentSlide.previousElementSibling;
-		moveToTargetSlide(carouselWrapper, currentSlide, prevSlide);
+		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
+
+		let prevSlide = currentSlide.previousElementSibling;
+		if (!prevSlide) {
+			const lastSlide = slides.length - 1;
+			prevSlide = slides[lastSlide];
+		}
+
+		moveToTargetSlide(carouselSlidesContainer, currentSlide, prevSlide);
 
 		// Updating active dot style
 		if (carouselDotsContainer) {
 			const currentDot = carouselDotsContainer.querySelector(".active");
-			const prevDot = currentDot.previousElementSibling;
+
+			let prevDot = currentDot.previousElementSibling;
+			if (!prevDot) {
+				const lastDot = carouselDotIndicators.length - 1;
+				prevDot = carouselDotIndicators[lastDot];
+			}
+
 			updateActiveDot(currentDot, prevDot);
 		}
 	});
@@ -55,47 +95,30 @@ if (nextSlideBtn) {
 	// Clicking next button will move to next slide
 	nextSlideBtn.addEventListener("click", () => {
 		// Changing slide
-		const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-		const nextSlide = currentSlide.nextElementSibling;
-		moveToTargetSlide(carouselWrapper, currentSlide, nextSlide);
+		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
+
+		let nextSlide = currentSlide.nextElementSibling;
+		if (!nextSlide) {
+			nextSlide = slides[0];
+		}
+
+		moveToTargetSlide(carouselSlidesContainer, currentSlide, nextSlide);
 
 		// Updating active dot style
 		if (carouselDotsContainer) {
 			const currentDot = carouselDotsContainer.querySelector(".active");
-			const nextDot = currentDot.nextElementSibling;
+
+			let nextDot = currentDot.nextElementSibling;
+			if (!nextDot) {
+				nextDot = carouselDotIndicators[0];
+			}
+
 			updateActiveDot(currentDot, nextDot);
 		}
 	});
 }
 
-// Checking if carouselDotsContainer exists in the DOM
-if (carouselDotsContainer) {
-	// for every slides, create a dot button
-	slides.forEach(() => {
-		const dotBtn = document.createElement("button");
-		dotBtn.classList.add("simple-carousel--dot");
-		carouselDotsContainer.appendChild(dotBtn);
-	});
-
-	const carouselDotIndicators = Array.from(carouselDotsContainer.children);
-
-	// Setting active class to the first dot
-	carouselDotIndicators[0].classList.add("active");
-
-	// Clicking pagination dots will move to the target slide
-	carouselDotIndicators.forEach((dot, index) => {
-		dot.addEventListener("click", (event) => {
-			const targetDot = event.target;
-			const currentDot = carouselDotsContainer.querySelector(".active");
-			const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-			const targetSlide = slides[index];
-
-			moveToTargetSlide(carouselWrapper, currentSlide, targetSlide);
-			updateActiveDot(currentDot, targetDot);
-		});
-	});
-}
-
+// Autoplay
 // const autoPlay = (interval) => {
 // 	setInterval(() => {
 // 		// Changing slide

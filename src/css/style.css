@@ -6,15 +6,15 @@
 	@apply relative;
 }
 
-.simple-carousel--wrapper {
+.simple-carousel--slides {
 	@apply relative h-96 transition-all;
 }
 
-.simple-carousel--wrapper .simple-carousel--slide {
+.simple-carousel--slides .simple-carousel--slide {
 	@apply absolute w-full h-full inset-0;
 }
 
-.simple-carousel--wrapper .simple-carousel--slide img {
+.simple-carousel--slides .simple-carousel--slide img {
 	@apply w-full h-full object-cover;
 }
 
@@ -31,7 +31,7 @@
 
 /* Pagination */
 .simple-carousel--dots {
-	@apply flex items-center justify-center mt-4 space-x-4 absolute -bottom-8 w-full;
+	@apply flex items-center justify-center mt-4 space-x-4 w-full;
 }
 .simple-carousel--dot {
 	@apply w-4 h-4 rounded-full bg-black cursor-pointer opacity-50 transition-all;
