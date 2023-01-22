@@ -157,3 +157,77 @@ const autoPlay = (interval) => {
 };
 
 autoPlay(2000);
+
+// Lightbox
+const lightbox = document.querySelector(".simple-carousel--lightbox");
+const lightboxContent = document.createElement("div");
+lightboxContent.classList.add("lightbox-content");
+
+// for every slides, create a lightbox-item with image
+slides.forEach((slide) => {
+	const lightboxItem = document.createElement("div");
+	lightboxItem.classList.add("lightbox-item");
+	const img = document.createElement("img");
+	img.setAttribute("src", `${slide.children[0].getAttribute("src")}`);
+	lightboxItem.appendChild(img);
+	lightboxContent.appendChild(lightboxItem);
+});
+
+lightbox.appendChild(lightboxContent);
+
+// const lightboxItems = Array.from(lightboxContent.children);
+
+const lightboxCloseBtn = document.createElement("button");
+lightboxCloseBtn.innerText = "x";
+lightboxCloseBtn.classList.add("lightbox-close-btn");
+
+lightbox.appendChild(lightboxCloseBtn);
+
+// Lightbox functionalities (borrowed from internet, need to improve)
+let slideIndex = 1;
+showSlide(slideIndex);
+
+function openLightbox() {
+	lightbox.style.display = "block";
+}
+
+function closeLightbox() {
+	lightbox.style.display = "none";
+}
+
+function changeSlide(n) {
+	showSlide((slideIndex += n));
+}
+
+function toSlide(n) {
+	showSlide((slideIndex = n));
+}
+
+function showSlide(n) {
+	const slides = document.getElementsByClassName("lightbox-item");
+
+	if (n > slides.length) {
+		slideIndex = 1;
+	}
+
+	if (n < 1) {
+		slideIndex = slides.length;
+	}
+
+	for (let i = 0; i < slides.length; i++) {
+		slides[i].style.display = "none";
+	}
+
+	slides[slideIndex - 1].style.display = "block";
+}
+
+slides.forEach((slide, index) => {
+	slide.addEventListener("click", () => {
+		openLightbox();
+		toSlide(index + 1);
+	});
+});
+
+lightboxCloseBtn.addEventListener("click", () => {
+	closeLightbox();
+});
