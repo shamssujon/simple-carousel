@@ -12,7 +12,7 @@
 }
 
 .simple-carousel--slides .simple-carousel--slide {
-	@apply absolute inset-0 h-full w-full;
+	@apply absolute inset-0 h-full w-full cursor-zoom-in;
 }
 
 .simple-carousel--slides .simple-carousel--slide img {
