@@ -9,6 +9,8 @@ const nextSlideBtn = carouselContainer.querySelector(".simple-carousel--nav.butt
 // Paginations
 const carouselDotsContainer = carouselContainer.querySelector(".simple-carousel--dots");
 
+let carouselInterval = null;
+
 // Setting active class to the first slide
 slides[0].classList.add("active");
 
@@ -50,6 +52,9 @@ carouselDotIndicators[0].classList.add("active");
 // Clicking pagination dots will move to the target slide
 carouselDotIndicators.forEach((dot, index) => {
 	dot.addEventListener("click", (event) => {
+		// Stop Autoplay
+		clearInterval(carouselInterval);
+
 		const targetDot = event.target;
 		const currentDot = carouselDotsContainer.querySelector(".active");
 		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
@@ -64,6 +69,9 @@ carouselDotIndicators.forEach((dot, index) => {
 if (prevSlideBtn) {
 	// Clicking prev button will move to prev slide
 	prevSlideBtn.addEventListener("click", () => {
+		// Stop Autoplay
+		clearInterval(carouselInterval);
+
 		// Changing slide
 		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
 
@@ -94,6 +102,9 @@ if (prevSlideBtn) {
 if (nextSlideBtn) {
 	// Clicking next button will move to next slide
 	nextSlideBtn.addEventListener("click", () => {
+		// Stop Autoplay
+		clearInterval(carouselInterval);
+
 		// Changing slide
 		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
 
@@ -119,18 +130,30 @@ if (nextSlideBtn) {
 }
 
 // Autoplay
-// const autoPlay = (interval) => {
-// 	setInterval(() => {
-// 		// Changing slide
-// 		const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-// 		const nextSlide = currentSlide.nextElementSibling;
-// 		moveToTargetSlide(carouselWrapper, currentSlide, nextSlide);
+const autoPlay = (interval) => {
+	carouselInterval = setInterval(() => {
+		// Changing slide
+		const currentSlide = carouselSlidesContainer.querySelector(".simple-carousel--slide.active");
 
-// 		// Updating active dot style
-// 		const currentDot = carouselDots.querySelector(".active");
-// 		const nextDot = currentDot.nextElementSibling;
-// 		updateActiveDot(currentDot, nextDot);
-// 	}, interval);
-// };
+		let nextSlide = currentSlide.nextElementSibling;
+		if (!nextSlide) {
+			nextSlide = slides[0];
+		}
 
-// autoPlay(1000);
+		moveToTargetSlide(carouselSlidesContainer, currentSlide, nextSlide);
+
+		// Updating active dot style
+		if (carouselDotsContainer) {
+			const currentDot = carouselDotsContainer.querySelector(".active");
+
+			let nextDot = currentDot.nextElementSibling;
+			if (!nextDot) {
+				nextDot = carouselDotIndicators[0];
+			}
+
+			updateActiveDot(currentDot, nextDot);
+		}
+	}, interval);
+};
+
+autoPlay(2000);
