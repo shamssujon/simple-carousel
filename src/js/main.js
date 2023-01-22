@@ -15,13 +15,36 @@ const setSlidePosition = (slide, index) => {
 };
 slides.forEach(setSlidePosition);
 
-// Clicking next will slide to next slide
-nextSlideBtn.addEventListener("click", ()=>{
-  const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-  const nextSlide = currentSlide.nextElementSibling;
-  const amountToMove = nextSlide.style.left;
+// Move/scroll to the slide
+const moveToTargetSlide = (carouselWrapper, currentSlide, targetSlide) => {
+	// const amountToMove = targetSlide.style.left;
+	carouselWrapper.style.transform = `translateX(-${targetSlide.style.left})`;
+	currentSlide.classList.remove("active");
+	targetSlide.classList.add("active");
+};
 
-  carouselWrapper.style.transform = `translateX(-${amountToMove})`
-  currentSlide.classList.remove("active")
-  nextSlide.classList.add("active")
-})
+// Clicking prev button will slide to prev slide
+prevSlideBtn.addEventListener("click", () => {
+	const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
+	const prevSlide = currentSlide.previousElementSibling;
+	// const amountToMove = prevSlide.style.left;
+
+	// carouselWrapper.style.transform = `translateX(-${amountToMove})`;
+	// currentSlide.classList.remove("active");
+	// prevSlide.classList.add("active");
+
+	moveToTargetSlide(carouselWrapper, currentSlide, prevSlide);
+});
+
+// Clicking next button will slide to next slide
+nextSlideBtn.addEventListener("click", () => {
+	const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
+	const nextSlide = currentSlide.nextElementSibling;
+	// const amountToMove = nextSlide.style.left;
+
+	// carouselWrapper.style.transform = `translateX(-${amountToMove})`;
+	// currentSlide.classList.remove("active");
+	// nextSlide.classList.add("active");
+
+	moveToTargetSlide(carouselWrapper, currentSlide, nextSlide);
+});
