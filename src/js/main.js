@@ -51,13 +51,17 @@ nextSlideBtn.addEventListener("click", () => {
 
 // Clicking pagination dots will move to the target slide
 carouselDotIndicators.forEach((dot, index) => {
-	dot.addEventListener("click", (e) => {
+	dot.addEventListener("click", (event) => {
 		// console.log(dot, index);
 
+    const currentDot = carouselDots.querySelector(".active");
+    const targetDot = event.target;
+
 		const currentSlide = carouselWrapper.querySelector(".simple-carousel--slide.active");
-
 		const targetSlide = slides[index];
-
 		moveToTargetSlide(carouselWrapper, currentSlide, targetSlide);
+
+    currentDot.classList.remove("active");
+    targetDot.classList.add("active");
 	});
 });

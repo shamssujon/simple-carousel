@@ -29,11 +29,13 @@
 	@apply right-4;
 }
 
-
 /* Pagination */
 .simple-carousel--dots {
-    @apply flex items-center justify-center mt-4 space-x-4 absolute -bottom-8 w-full;
+	@apply flex items-center justify-center mt-4 space-x-4 absolute -bottom-8 w-full;
 }
 .simple-carousel--dot {
-    @apply w-4 h-4 rounded-full bg-black cursor-pointer
+	@apply w-4 h-4 rounded-full bg-black cursor-pointer opacity-50 transition-all;
+}
+.simple-carousel--dot.active {
+	@apply opacity-100;
 }
